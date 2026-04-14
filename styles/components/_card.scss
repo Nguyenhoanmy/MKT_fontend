@@ -1,0 +1,166 @@
+// ============================================================
+// COMPONENTS — CARD
+// BEM: .course-card, course-card__*, course-card--featured
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.course-card {
+  @include card-base;
+  @include hover-lift(-6px, $shadow-lg);
+  cursor: pointer;
+  position: relative;
+  background: $bg-card;
+
+  &--featured {
+    border: 2px solid $primary;
+    &::before {
+      content: '🔥 Nổi bật';
+      position: absolute;
+      top: $spacing-3;
+      left: $spacing-3;
+      background: $gradient-primary;
+      color: white;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      padding: 2px $spacing-2;
+      border-radius: $radius-full;
+      z-index: 2;
+    }
+  }
+
+  &__image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+
+    &::after {
+      content: '';
+      @include absolute-fill;
+      background: $gradient-card;
+      opacity: 0;
+      transition: opacity $transition-base;
+    }
+  }
+
+  &:hover &__image-wrap::after { opacity: 1; }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+  }
+  &:hover &__image { transform: scale(1.06); }
+
+  &__play-icon {
+    @include absolute-fill;
+    @include flex-center;
+    opacity: 0;
+    z-index: 3;
+    transition: opacity $transition-base;
+    color: white;
+    font-size: 48px;
+  }
+  &:hover &__play-icon { opacity: 1; }
+
+  &__body {
+    padding: $spacing-4;
+  }
+
+  &__category {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: $spacing-2;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    line-height: $line-height-tight;
+    margin-bottom: $spacing-2;
+    @include truncate(2);
+  }
+
+  &__instructor {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin-bottom: $spacing-3;
+    @include flex(row, center, flex-start, $spacing-2);
+  }
+
+  &__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__meta {
+    @include flex-between;
+    margin-bottom: $spacing-3;
+  }
+
+  &__rating {
+    @include flex(row, center, flex-start, $spacing-1);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $warning;
+
+    span { color: $text-muted; font-weight: $font-weight-regular; }
+  }
+
+  &__students {
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+
+  &__footer {
+    @include flex-between;
+    border-top: 1px solid $border;
+    padding-top: $spacing-3;
+  }
+
+  &__price {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+
+    &--free {
+      color: $success;
+    }
+    &--original {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-regular;
+      color: $text-muted;
+      text-decoration: line-through;
+      margin-left: $spacing-2;
+    }
+  }
+
+  &__level {
+    font-size: $font-size-xs;
+    padding: 2px $spacing-2;
+    border-radius: $radius-full;
+    font-weight: $font-weight-medium;
+
+    &--beginner  { background: $success-light; color: $success; }
+    &--intermediate { background: $warning-light; color: $warning; }
+    &--advanced  { background: $error-light; color: $error; }
+  }
+
+  // --- Skeleton variant ---
+  &--skeleton {
+    pointer-events: none;
+    .course-card__image-wrap { @include skeleton; aspect-ratio: 16/9; }
+    .course-card__category   { @include skeleton; height: 12px; width: 60px; }
+    .course-card__title      { @include skeleton; height: 16px; border-radius: $radius-sm; margin-bottom: $spacing-2; }
+    .course-card__title-2    { @include skeleton; height: 16px; width: 70%; border-radius: $radius-sm; }
+    .course-card__instructor { @include skeleton; height: 14px; width: 100px; }
+    .course-card__price      { @include skeleton; height: 20px; width: 80px; }
+  }
+}

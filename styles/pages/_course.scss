@@ -1,0 +1,351 @@
+// ============================================================
+// PAGES — COURSE (List + Detail)
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// --- Course List Page ---
+.courses-page {
+  @include container;
+  padding-top: $spacing-7;
+  padding-bottom: $spacing-10;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: $spacing-7;
+  align-items: start;
+
+  @include tablet { grid-template-columns: 1fr; }
+}
+
+.courses-filter {
+  position: sticky;
+  top: calc(#{$header-height} + #{$spacing-4});
+  background: $bg-card;
+  border: 1px solid $border;
+  border-radius: $radius-xl;
+  padding: $spacing-5;
+  @include tablet { position: static; }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-5;
+    @include flex-between;
+  }
+
+  &__section {
+    margin-bottom: $spacing-5;
+    padding-bottom: $spacing-5;
+    border-bottom: 1px solid $border;
+
+    &:last-child { border-bottom: none; margin-bottom: 0; }
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-3;
+  }
+
+  &__option {
+    @include flex(row, center, flex-start, $spacing-2);
+    padding: $spacing-2 0;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      accent-color: $primary;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    span {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      transition: color $transition-fast;
+    }
+
+    &:hover span { color: $primary; }
+  }
+}
+
+.courses-main {
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-5;
+    @include mobile { flex-direction: column; align-items: flex-start; gap: $spacing-3; }
+  }
+
+  &__count {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    span { font-weight: $font-weight-semibold; color: $text-primary; }
+  }
+
+  &__sort {
+    @include flex(row, center, flex-start, $spacing-2);
+    font-size: $font-size-sm;
+    color: $text-secondary;
+
+    select {
+      border: 1px solid $border;
+      border-radius: $radius-md;
+      padding: $spacing-2 $spacing-3;
+      font-size: $font-size-sm;
+      color: $text-primary;
+      background: $bg-card;
+      cursor: pointer;
+
+      &:focus { outline: none; border-color: $primary; }
+    }
+  }
+
+  &__grid { @include grid-auto(260px, $spacing-5); }
+
+  &__pagination {
+    @include flex-center;
+    gap: $spacing-2;
+    margin-top: $spacing-8;
+  }
+
+  &__page-btn {
+    @include btn-base;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    background: $bg-card;
+    border: 1px solid $border;
+    color: $text-secondary;
+
+    &--active {
+      background: $gradient-primary;
+      color: white;
+      border-color: $primary;
+    }
+    &:hover:not(&--active) { border-color: $primary; color: $primary; }
+  }
+}
+
+// --- Course Detail Page ---
+.course-detail {
+  &__hero {
+    background: $gradient-hero;
+    padding: $spacing-10 0;
+    @include mobile { padding: $spacing-7 0; }
+  }
+
+  &__hero-inner {
+    @include container;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: $spacing-8;
+    align-items: start;
+
+    @include tablet { grid-template-columns: 1fr; }
+  }
+
+  &__breadcrumb {
+    @include flex(row, center, flex-start, $spacing-2);
+    font-size: $font-size-sm;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: $spacing-4;
+
+    a { color: rgba(255,255,255,0.8); text-decoration: none;
+      &:hover { color: white; }
+    }
+    span { color: rgba(255,255,255,0.4); }
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: $spacing-4;
+
+    @include tablet { font-size: $font-size-2xl; }
+  }
+
+  &__desc {
+    font-size: $font-size-base;
+    color: rgba(255,255,255,0.75);
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-5;
+  }
+
+  &__meta {
+    @include flex(row, center, flex-start, $spacing-5);
+    flex-wrap: wrap;
+    gap: $spacing-3;
+    color: rgba(255,255,255,0.7);
+    font-size: $font-size-sm;
+  }
+
+  &__meta-item { @include flex(row, center, flex-start, $spacing-2); }
+
+  &__body {
+    @include container;
+    padding-top: $spacing-8;
+    padding-bottom: $spacing-10;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: $spacing-8;
+    align-items: start;
+
+    @include tablet { grid-template-columns: 1fr; }
+  }
+
+  &__content {}
+
+  // What you'll learn
+  &__outcomes {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    margin-bottom: $spacing-7;
+
+    h3 { margin-bottom: $spacing-4; font-size: $font-size-lg; }
+
+    ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-2;
+      @include mobile { grid-template-columns: 1fr; }
+    }
+
+    li {
+      @include flex(row, flex-start, flex-start, $spacing-2);
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+
+      &::before { content: '✓'; color: $success; font-weight: bold; flex-shrink: 0; }
+    }
+  }
+
+  // Curriculum Accordion
+  &__curriculum {
+    margin-bottom: $spacing-7;
+
+    &-section {
+      border: 1px solid $border;
+      border-radius: $radius-lg;
+      margin-bottom: $spacing-2;
+      overflow: hidden;
+
+      &-header {
+        @include flex-between;
+        padding: $spacing-4 $spacing-5;
+        background: $bg-main;
+        cursor: pointer;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-sm;
+        color: $text-primary;
+        transition: background $transition-fast;
+
+        &:hover { background: darken($bg-main, 2%); }
+      }
+
+      &-meta {
+        font-size: $font-size-xs;
+        color: $text-muted;
+        font-weight: $font-weight-regular;
+      }
+
+      &-lessons {
+        border-top: 1px solid $border;
+      }
+    }
+
+    &-lesson {
+      @include flex-between;
+      padding: $spacing-3 $spacing-5;
+      border-bottom: 1px solid $border;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      transition: background $transition-fast;
+
+      &:last-child { border-bottom: none; }
+      &:hover { background: $bg-main; }
+
+      &-left { @include flex(row, center, flex-start, $spacing-3); }
+      &-icon { color: $primary; }
+      &-preview {
+        font-size: $font-size-xs;
+        color: $secondary;
+        cursor: pointer;
+        &:hover { text-decoration: underline; }
+      }
+      &-duration { font-size: $font-size-xs; color: $text-muted; }
+    }
+  }
+
+  // Sidebar sticky enroll card
+  &__sidebar {
+    @include tablet { order: -1; }
+  }
+
+  &__enroll-card {
+    position: sticky;
+    top: calc(#{$header-height} + #{$spacing-4});
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $radius-2xl;
+    overflow: hidden;
+    box-shadow: $shadow-xl;
+    @include tablet { position: static; }
+
+    &-preview {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    &-body { padding: $spacing-5; }
+
+    &-price {
+      @include flex(row, baseline, flex-start, $spacing-2);
+      margin-bottom: $spacing-5;
+
+      .price-current {
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-extrabold;
+        color: $text-primary;
+      }
+      .price-original {
+        font-size: $font-size-base;
+        color: $text-muted;
+        text-decoration: line-through;
+      }
+      .price-badge {
+        font-size: $font-size-xs;
+        background: $error-light;
+        color: $error;
+        padding: 2px $spacing-2;
+        border-radius: $radius-full;
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    &-cta {
+      width: 100%;
+      margin-bottom: $spacing-3;
+    }
+
+    &-includes {
+      margin-top: $spacing-5;
+      &-title { font-weight: $font-weight-semibold; font-size: $font-size-sm; margin-bottom: $spacing-3; }
+      &-item {
+        @include flex(row, center, flex-start, $spacing-2);
+        font-size: $font-size-sm;
+        color: $text-secondary;
+        padding: $spacing-2 0;
+        &-icon { color: $primary; }
+      }
+    }
+  }
+}
