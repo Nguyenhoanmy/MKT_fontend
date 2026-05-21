@@ -52,7 +52,7 @@ Trước khi bắt đầu, đảm bảo bạn đã cài đặt:
 ```bash
 # Nếu sử dụng Git
 git clone [repository-url]
-cd elearning-platform
+cd MKT_fontend
 ```
 
 ### Bước 2: Cài đặt dependencies
