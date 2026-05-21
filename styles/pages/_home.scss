@@ -1,0 +1,282 @@
+// ============================================================
+// PAGES — HOME
+// HeroSection, FeaturedCourses, Categories, Testimonials
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// --- Hero Section ---
+.hero {
+  background: $gradient-hero;
+  position: relative;
+  overflow: hidden;
+  padding: $spacing-12 0;
+  @include mobile { padding: $spacing-8 0; }
+
+  // Decorative blobs
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  &::before {
+    width: 500px; height: 500px;
+    background: rgba($primary, 0.25);
+    top: -150px; left: -100px;
+  }
+  &::after {
+    width: 400px; height: 400px;
+    background: rgba($secondary, 0.18);
+    bottom: -100px; right: -50px;
+  }
+
+  &__inner {
+    @include container;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-9;
+    align-items: center;
+
+    @include tablet { grid-template-columns: 1fr; text-align: center; }
+  }
+
+  &__content {}
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: $secondary-light;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-full;
+    margin-bottom: $spacing-5;
+    letter-spacing: 0.05em;
+  }
+
+  &__title {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-extrabold;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: $spacing-5;
+    letter-spacing: -0.03em;
+
+    @include tablet  { font-size: $font-size-4xl; }
+    @include mobile  { font-size: $font-size-3xl; }
+
+    span { @include gradient-text(linear-gradient(135deg, $primary-light, $secondary-light)); }
+  }
+
+  &__desc {
+    font-size: $font-size-lg;
+    color: rgba(255,255,255,0.65);
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-7;
+    @include mobile { font-size: $font-size-base; }
+  }
+
+  &__actions {
+    @include flex(row, center, flex-start, $spacing-3);
+    flex-wrap: wrap;
+    @include tablet { justify-content: center; }
+  }
+
+  &__stats {
+    @include flex(row, flex-start, flex-start, $spacing-7);
+    margin-top: $spacing-8;
+    @include tablet { justify-content: center; }
+    @include mobile { gap: $spacing-5; }
+  }
+
+  &__stat {
+    &-number {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-extrabold;
+      color: white;
+    }
+    &-label {
+      font-size: $font-size-xs;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  &__visual {
+    @include tablet { display: none; }
+
+    &-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: $radius-2xl;
+      padding: $spacing-5;
+      backdrop-filter: blur(16px);
+      animation: hero-float 4s ease-in-out infinite;
+    }
+
+    &-img {
+      border-radius: $radius-xl;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    &-badge {
+      position: absolute;
+      @include glass(rgba(255,255,255,0.12), 16px);
+      border-radius: $radius-lg;
+      padding: $spacing-3 $spacing-4;
+      @include flex(row, center, flex-start, $spacing-2);
+      font-size: $font-size-sm;
+      color: white;
+      font-weight: $font-weight-medium;
+
+      &--bottom-left { bottom: -$spacing-5; left: -$spacing-5; }
+      &--top-right   { top: -$spacing-4; right: -$spacing-4; }
+    }
+  }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+// --- Section wrapper ---
+.section {
+  padding: $spacing-10 0;
+  @include mobile { padding: $spacing-7 0; }
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-7;
+    @include mobile { flex-direction: column; align-items: flex-start; gap: $spacing-3; }
+  }
+
+  &__title-group {}
+}
+
+// --- Featured Courses ---
+.featured-courses {
+  &__grid {
+    @include grid-auto(280px, $spacing-5);
+  }
+}
+
+// --- Categories ---
+.categories {
+  background: $bg-card;
+
+  &__grid {
+    @include grid(6, $spacing-4);
+    @include tablet { @include grid(3, $spacing-4); }
+    @include mobile { @include grid(2, $spacing-3); }
+  }
+
+  &__item {
+    @include flex(column, center, center, $spacing-3);
+    padding: $spacing-5;
+    border-radius: $radius-xl;
+    border: 1.5px solid $border;
+    cursor: pointer;
+    transition: all $transition-base;
+    text-align: center;
+
+    &:hover {
+      border-color: $primary;
+      background: $primary-alpha;
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+
+    &-icon {
+      font-size: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: $radius-xl;
+      @include flex-center;
+      background: $bg-main;
+      transition: background $transition-fast;
+    }
+
+    &:hover &-icon { background: $primary-alpha; }
+
+    &-name {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+    }
+
+    &-count {
+      font-size: $font-size-xs;
+      color: $text-muted;
+    }
+  }
+}
+
+// --- Testimonials ---
+.testimonials {
+  background: linear-gradient(180deg, $bg-main 0%, #EEF2FF 100%);
+
+  &__grid {
+    @include grid(3, $spacing-5);
+    @include tablet { @include grid(1, $spacing-4); }
+  }
+
+  &__card {
+    background: $bg-card;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    border: 1px solid $border;
+    box-shadow: $shadow-card;
+    transition: all $transition-base;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+  &__quote {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-5;
+    @include truncate(4);
+  }
+
+  &__author {
+    @include flex(row, center, flex-start, $spacing-3);
+  }
+
+  &__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $primary-light;
+  }
+
+  &__name {
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    color: $text-primary;
+  }
+  &__role {
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+  &__rating {
+    @include flex(row, center, flex-start, 2px);
+    margin-bottom: $spacing-4;
+    color: $warning;
+  }
+}

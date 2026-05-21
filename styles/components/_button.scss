@@ -1,0 +1,110 @@
+// ============================================================
+// COMPONENTS — BUTTON
+// BEM: .btn, .btn--primary, .btn--secondary, .btn--outline, .btn--ghost
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  @include btn-base;
+  padding: $spacing-3 $spacing-5;
+  font-size: $font-size-sm;
+  line-height: 1;
+
+  // Ripple effect
+  &::after {
+    content: '';
+    @include absolute-fill;
+    background: rgba(255,255,255,0.15);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+  &:active::after { opacity: 1; }
+
+  // --- Sizes ---
+  &--sm {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-xs;
+  }
+  &--lg {
+    padding: $spacing-4 $spacing-7;
+    font-size: $font-size-base;
+    border-radius: $radius-lg;
+  }
+  &--full { width: 100%; }
+  &--icon {
+    padding: $spacing-3;
+    border-radius: $radius-md;
+    aspect-ratio: 1;
+  }
+
+  // --- Variants ---
+  &--primary {
+    background: $gradient-primary;
+    color: $text-inverse;
+    box-shadow: $shadow-primary;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.45);
+    }
+    &:active { transform: translateY(0); }
+  }
+
+  &--secondary {
+    background: $secondary;
+    color: $text-inverse;
+
+    &:hover {
+      background: $secondary-dark;
+      transform: translateY(-2px);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $primary;
+    border: 2px solid $primary;
+
+    &:hover {
+      background: $primary-alpha;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $text-secondary;
+
+    &:hover {
+      background: $bg-main;
+      color: $text-primary;
+    }
+  }
+
+  &--danger {
+    background: $error;
+    color: $text-inverse;
+
+    &:hover { background: darken($error, 8%); }
+  }
+
+  // --- Loading state ---
+  &--loading {
+    pointer-events: none;
+    .btn__spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: btn-spin 0.7s linear infinite;
+    }
+  }
+
+  &__icon { flex-shrink: 0; }
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}

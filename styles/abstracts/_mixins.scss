@@ -1,0 +1,203 @@
+// ============================================================
+// ABSTRACTS — MIXINS
+// Reusable SCSS helpers, responsive utilities, BEM patterns
+// ============================================================
+@use 'variables' as *;
+
+// --- Responsive Breakpoints ---
+@mixin mobile {
+  @media (max-width: #{$mobile}) { @content; }
+}
+@mixin tablet {
+  @media (max-width: #{$tablet}) { @content; }
+}
+@mixin desktop {
+  @media (min-width: #{$desktop}) { @content; }
+}
+@mixin xl {
+  @media (min-width: #{$xl}) { @content; }
+}
+@mixin between($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max}) { @content; }
+}
+
+// --- Flexbox Utilities ---
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 { gap: $gap; }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// --- Grid Utilities ---
+@mixin grid($cols: 3, $gap: $spacing-5) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
+@mixin grid-auto($min: 280px, $gap: $spacing-5) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: $gap;
+}
+
+// --- Typography ---
+@mixin heading($size, $weight: $font-weight-bold) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height-tight;
+  color: $text-primary;
+}
+
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// --- Visual Effects ---
+@mixin glass($bg: rgba(255,255,255,0.08), $blur: 16px, $border: rgba(255,255,255,0.12)) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $border;
+}
+
+@mixin gradient-text($gradient: $gradient-primary) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin hover-lift($y: -4px, $shadow: $shadow-lg) {
+  transition: transform $transition-base, box-shadow $transition-base;
+  &:hover {
+    transform: translateY($y);
+    box-shadow: $shadow;
+  }
+}
+
+// --- Container ---
+@mixin container($max: $xl) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $spacing-5;
+
+  @include tablet {
+    padding-inline: $spacing-4;
+  }
+  @include mobile {
+    padding-inline: $spacing-3;
+  }
+}
+
+// --- Button Base ---
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  border: none;
+  border-radius: $radius-md;
+  font-family: $font-family;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-base;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// --- Card Base ---
+@mixin card-base {
+  background: $bg-card;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  border: 1px solid $border;
+  transition: all $transition-base;
+}
+
+// --- Skeleton Loading ---
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 25%,
+    #f3f4f6 50%,
+    #e5e7eb 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: $radius-md;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// --- Scrollbar ---
+@mixin custom-scrollbar($thumb: $primary-light, $track: $bg-main) {
+  &::-webkit-scrollbar { width: 6px; height: 6px; }
+  &::-webkit-scrollbar-track { background: $track; border-radius: $radius-full; }
+  &::-webkit-scrollbar-thumb { background: $thumb; border-radius: $radius-full;
+    &:hover { background: $primary; }
+  }
+}
+
+// --- Focus Ring ---
+@mixin focus-ring($color: $primary) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+}
+
+// --- Absolute fill ---
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+// --- Aspect Ratio ---
+@mixin aspect($ratio: 16/9) {
+  aspect-ratio: $ratio;
+  width: 100%;
+  object-fit: cover;
+}

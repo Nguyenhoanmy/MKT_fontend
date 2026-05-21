@@ -1,0 +1,163 @@
+// ============================================================
+// MAIN — Barrel Import File (7-1 Pattern)
+// Thứ tự import quan trọng: abstracts → base → components → layout → pages
+// ============================================================
+
+// 1. Abstracts (không generate CSS, chỉ define variables/mixins)
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins'    as *;
+
+// 2. Base
+@use 'base/reset';
+@use 'base/typography';
+
+// 3. Components
+@use 'components/button';
+@use 'components/card';
+@use 'components/admin';
+
+// 4. Layout
+@use 'layout/header';
+@use 'layout/footer';
+
+// 5. Pages
+@use 'pages/home';
+@use 'pages/about';
+@use 'pages/course';
+@use 'pages/learn';
+@use 'pages/auth';
+@use 'pages/teachers';
+@use 'pages/profile';
+@use 'pages/my-courses';
+@use 'pages/teacher-dashboard';
+
+// ============================================================
+// GLOBAL UTILITY CLASSES
+// Dùng để tái sử dụng nhanh ở JSX mà không cần thêm class riêng
+// ============================================================
+
+.container { @include container; }
+
+// Spacing
+.mt-1 { margin-top: $spacing-1; }
+.mt-2 { margin-top: $spacing-2; }
+.mt-4 { margin-top: $spacing-4; }
+.mt-5 { margin-top: $spacing-5; }
+.mt-6 { margin-top: $spacing-6; }
+.mt-8 { margin-top: $spacing-8; }
+.mb-2 { margin-bottom: $spacing-2; }
+.mb-4 { margin-bottom: $spacing-4; }
+.mb-5 { margin-bottom: $spacing-5; }
+.mb-7 { margin-bottom: $spacing-7; }
+
+// Display
+.d-flex         { display: flex; }
+.align-center   { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.flex-wrap      { flex-wrap: wrap; }
+.gap-2          { gap: $spacing-2; }
+.gap-3          { gap: $spacing-3; }
+.gap-4          { gap: $spacing-4; }
+
+// Visibility
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Badge
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-1 $spacing-3;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+
+  &--primary   { background: $primary-alpha;  color: $primary; }
+  &--success   { background: $success-light;  color: $success; }
+  &--warning   { background: $warning-light;  color: $warning; }
+  &--error     { background: $error-light;    color: $error;   }
+  &--secondary { background: rgba($secondary, 0.12); color: $secondary-dark; }
+}
+
+// Divider
+.divider {
+  height: 1px;
+  background: $border;
+  margin: $spacing-5 0;
+}
+
+// Loading spinner
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid $border;
+  border-top-color: $primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+
+  &--sm { width: 20px; height: 20px; border-width: 2px; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Progress bar
+.progress-bar {
+  height: 8px;
+  background: $border;
+  border-radius: $radius-full;
+  overflow: hidden;
+
+  &__fill {
+    height: 100%;
+    background: $gradient-primary;
+    border-radius: $radius-full;
+    transition: width $transition-slow;
+  }
+}
+
+// Tag
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: $spacing-1 $spacing-2;
+  background: $bg-main;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+}
+
+// Avatar
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  &--sm  { width: 32px; height: 32px; }
+  &--md  { width: 48px; height: 48px; }
+  &--lg  { width: 64px; height: 64px; }
+  &--xl  { width: 80px; height: 80px; }
+}
+
+// Rating stars
+.rating {
+  @include flex(row, center, flex-start, 2px);
+  &__star {
+    color: $text-muted;
+    &--filled { color: $warning; }
+    &--half   { color: $warning; }
+  }
+  &__count {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-left: $spacing-2;
+  }
+}

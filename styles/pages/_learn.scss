@@ -1,0 +1,250 @@
+// ============================================================
+// PAGES — LEARN (Learning Page)
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.learn-layout {
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr;
+  height: calc(100vh - #{$header-height});
+  overflow: hidden;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+// Lesson sidebar
+.lesson-sidebar {
+  @include custom-scrollbar;
+  overflow-y: auto;
+  background: $bg-card;
+  border-right: 1px solid $border;
+
+  @include tablet {
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid $border;
+  }
+
+  &__header {
+    padding: $spacing-4 $spacing-5;
+    border-bottom: 1px solid $border;
+    position: sticky;
+    top: 0;
+    background: $bg-card;
+    z-index: 10;
+
+    h3 { font-size: $font-size-sm; font-weight: $font-weight-bold; color: $text-primary; margin-bottom: $spacing-2; }
+  }
+
+  &__progress {
+    @include flex-between;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    margin-bottom: $spacing-2;
+  }
+
+  &__progress-bar {
+    height: 4px;
+    background: $border;
+    border-radius: $radius-full;
+    overflow: hidden;
+
+    span {
+      display: block;
+      height: 100%;
+      background: $gradient-primary;
+      border-radius: $radius-full;
+      transition: width $transition-slow;
+    }
+  }
+
+  &__section {
+    &-title {
+      padding: $spacing-3 $spacing-5;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: $bg-main;
+      border-bottom: 1px solid $border;
+      @include flex-between;
+
+      span { color: $text-muted; font-weight: $font-weight-regular; text-transform: none; }
+    }
+  }
+
+  &__lesson {
+    @include flex(row, center, flex-start, $spacing-3);
+    padding: $spacing-3 $spacing-5;
+    border-bottom: 1px solid rgba($border, 0.5);
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover { background: $bg-main; }
+
+    &--active {
+      background: $primary-alpha;
+      border-left: 3px solid $primary;
+
+      .lesson-sidebar__lesson-title { color: $primary; font-weight: $font-weight-semibold; }
+    }
+
+    &--completed .lesson-sidebar__lesson-check { color: $success; }
+
+    &-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid $border;
+      @include flex-center;
+      flex-shrink: 0;
+      font-size: 10px;
+      transition: all $transition-fast;
+      color: transparent;
+
+      .lesson-sidebar__lesson--completed & {
+        background: $success;
+        border-color: $success;
+        color: white;
+      }
+    }
+
+    &-info { flex: 1; min-width: 0; }
+
+    &-title {
+      font-size: $font-size-sm;
+      color: $text-primary;
+      @include truncate;
+    }
+
+    &-meta {
+      @include flex(row, center, flex-start, $spacing-2);
+      margin-top: 2px;
+      font-size: $font-size-xs;
+      color: $text-muted;
+    }
+  }
+}
+
+// Video area
+.video-area {
+  @include custom-scrollbar;
+  overflow-y: auto;
+
+  &__player-wrap {
+    background: #000;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  &__controls {
+    @include flex-between;
+    padding: $spacing-3 $spacing-5;
+    background: #1a1a2e;
+    color: white;
+    @include mobile { flex-wrap: wrap; gap: $spacing-3; }
+
+    &-left, &-right {
+      @include flex(row, center, flex-start, $spacing-2);
+    }
+
+    &-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: $radius-md;
+      @include flex-center;
+      cursor: pointer;
+      transition: background $transition-fast;
+
+      &:hover { background: rgba(255,255,255,0.2); }
+      &--active { background: $primary; }
+    }
+
+    &-time {
+      font-size: $font-size-sm;
+      color: rgba(255,255,255,0.7);
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__seeker {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    appearance: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: $primary;
+    }
+  }
+
+  &__tabs {
+    @include flex(row, center, flex-start, 0);
+    border-bottom: 1px solid $border;
+    padding: 0 $spacing-5;
+
+    &-btn {
+      padding: $spacing-4 $spacing-5;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $text-secondary;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all $transition-fast;
+      white-space: nowrap;
+
+      &--active {
+        color: $primary;
+        border-bottom-color: $primary;
+      }
+      &:hover { color: $primary; }
+    }
+  }
+
+  &__tab-content {
+    padding: $spacing-5;
+  }
+
+  &__notes {
+    &-area {
+      width: 100%;
+      min-height: 120px;
+      padding: $spacing-4;
+      border: 1.5px solid $border;
+      border-radius: $radius-lg;
+      font-family: $font-family;
+      font-size: $font-size-sm;
+      resize: vertical;
+      transition: border-color $transition-fast;
+
+      &:focus { outline: none; border-color: $primary; }
+    }
+
+    &-save {
+      margin-top: $spacing-3;
+    }
+  }
+}
