@@ -7,6 +7,7 @@
 | Nguyễn Hoàn Mỹ | Developer |
 | Đinh Tiến Tài | Developer |
 | Triệu Nguyên Kim | Developer |
+| Huỳnh Tiến Đạt| Developer |
 
 ---
 
