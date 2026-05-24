@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hoan My\\Downloads\\MKT_fontend-main\\MKT_fontend-main\\HelloApp\\HelloApp.csproj": {}
+    "D:\\DMKT\\MKT_fontend\\HelloApp\\HelloApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hoan My\\Downloads\\MKT_fontend-main\\MKT_fontend-main\\HelloApp\\HelloApp.csproj": {
+    "D:\\DMKT\\MKT_fontend\\HelloApp\\HelloApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hoan My\\Downloads\\MKT_fontend-main\\MKT_fontend-main\\HelloApp\\HelloApp.csproj",
+        "projectUniqueName": "D:\\DMKT\\MKT_fontend\\HelloApp\\HelloApp.csproj",
         "projectName": "HelloApp",
-        "projectPath": "C:\\Users\\Hoan My\\Downloads\\MKT_fontend-main\\MKT_fontend-main\\HelloApp\\HelloApp.csproj",
+        "projectPath": "D:\\DMKT\\MKT_fontend\\HelloApp\\HelloApp.csproj",
         "packagesPath": "C:\\Users\\Hoan My\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hoan My\\Downloads\\MKT_fontend-main\\MKT_fontend-main\\HelloApp\\obj\\",
+        "outputPath": "D:\\DMKT\\MKT_fontend\\HelloApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

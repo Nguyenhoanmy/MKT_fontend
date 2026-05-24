@@ -26,7 +26,7 @@ export default function ProfilePage() {
       // Load enrolled courses
       const loadCourses = async () => {
         try {
-          const courses = await courseService.getAllCourses();
+          const courses = await courseService.getAll();
           const enrolled = courses.filter(c => user.enrolledCourses?.includes(c.id));
           setEnrolledCourses(enrolled);
         } catch (error) {
