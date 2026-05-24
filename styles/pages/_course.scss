@@ -1,6 +1,7 @@
 // ============================================================
 // PAGES — COURSE (List + Detail)
 // ============================================================
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -247,7 +248,7 @@
         color: $text-primary;
         transition: background $transition-fast;
 
-        &:hover { background: darken($bg-main, 2%); }
+        &:hover { background: color.adjust($bg-main, $lightness: -2%); }
       }
 
       &-meta {

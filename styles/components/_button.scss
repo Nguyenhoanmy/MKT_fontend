@@ -2,6 +2,7 @@
 // COMPONENTS — BUTTON
 // BEM: .btn, .btn--primary, .btn--secondary, .btn--outline, .btn--ghost
 // ============================================================
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -86,7 +87,7 @@
     background: $error;
     color: $text-inverse;
 
-    &:hover { background: darken($error, 8%); }
+    &:hover { background: color.adjust($error, $lightness: -8%); }
   }
 
   // --- Loading state ---

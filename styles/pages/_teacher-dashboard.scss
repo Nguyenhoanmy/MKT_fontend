@@ -59,6 +59,17 @@
     }
   }
 
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+
   &__btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -70,6 +81,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     &:hover {
       transform: translateY(-2px);
@@ -84,7 +98,107 @@
       width: 100%;
       padding: 0.6rem 1rem;
       font-size: 0.9rem;
+      justify-content: center;
     }
+
+    &--secondary {
+      background: #f3f4f6;
+      color: #1a1a1a;
+      border: 2px solid #e5e7eb;
+
+      &:hover {
+        background: #e5e7eb;
+        border-color: #667eea;
+      }
+    }
+  }
+}
+
+// ============================================================
+// DASHBOARD TABS
+// ============================================================
+
+.dashboard-tabs {
+  display: flex;
+  gap: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #f3f4f6;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #e5e7eb;
+      color: #1a1a1a;
+    }
+
+    &--active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+
+      svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// ============================================================
+// SECTION HEADER WITH FILTERS
+// ============================================================
+
+.section-header__filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #667eea;
+    color: #667eea;
+  }
+
+  &--active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
   }
 }
 
@@ -295,6 +409,11 @@
   &:hover {
     border-color: #667eea;
     background: #f8f9ff;
+
+    .course-item__actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
   &--active {
@@ -310,15 +429,38 @@
     gap: 1rem;
   }
 
+  &__info {
+    flex: 1;
+  }
+
   &__title {
     font-size: 1.1rem;
     font-weight: 700;
     color: #1a1a1a;
-    margin: 0;
-    flex: 1;
+    margin: 0 0 0.5rem 0;
 
     @media (max-width: 480px) {
       font-size: 1rem;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: #f3f4f6;
+    color: #666;
+
+    &--active {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+
+    &--draft {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
     }
   }
 
@@ -334,6 +476,7 @@
     gap: 1.5rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
+    flex-wrap: wrap;
 
     @media (max-width: 480px) {
       flex-direction: column;
@@ -348,6 +491,115 @@
 
   &__progress {
     margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+}
+
+.course-action-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &--view {
+    &:hover {
+      background: #dbeafe;
+      color: #0284c7;
+    }
+  }
+
+  &--edit {
+    &:hover {
+      background: #dbeafe;
+      color: #0284c7;
+    }
+  }
+
+  &--delete {
+    &:hover {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+  }
+}
+
+// ============================================================
+// SECTION HEADER
+// ============================================================
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &__count {
+    background: #f3f4f6;
+    color: #666;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  &__filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #667eea;
+    color: #667eea;
+  }
+
+  &--active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
   }
 }
 
@@ -364,6 +616,21 @@
     border-radius: 10px;
     transition: width 0.3s ease;
   }
+
+  &--small {
+    height: 6px;
+  }
+
+  &--colored {
+    background: #e5e7eb;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .progress-bar__fill {
+      border-radius: 10px;
+    }
+  }
 }
 
 .stat-label {
@@ -379,6 +646,53 @@
 
   p {
     margin: 0;
+  }
+}
+
+// ============================================================
+// DASHBOARD CONTENT LAYOUT
+// ============================================================
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  &__full {
+    grid-column: 1 / -1;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (max-width: 1200px) {
+      gap: 1.5rem;
+    }
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (max-width: 1200px) {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
   }
 }
 
@@ -697,5 +1011,282 @@
       color: #666;
       margin: 0;
     }
+  }
+}
+
+// ============================================================
+// STUDENTS SECTION
+// ============================================================
+
+.students-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+.student-card {
+  background: linear-gradient(135deg, #f8f9ff 0%, #fff5f9 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #f3f4f6;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+  }
+
+  &__header {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+  }
+
+  &__rank {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
+
+  &__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 1rem 0;
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  &__progress {
+    margin-bottom: 1rem;
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 1rem;
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+.student-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__label {
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  &__value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #667eea;
+  }
+}
+
+// ============================================================
+// EARNINGS SECTION
+// ============================================================
+
+.earnings-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.earnings-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.earnings-total {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    opacity: 0.9;
+  }
+
+  &__amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+  }
+
+  &__subtitle {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+}
+
+.earnings-month {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    opacity: 0.9;
+  }
+
+  &__amount {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.earning-card {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  &__percentage {
+    display: inline-block;
+    background: #e5e7eb;
+    color: #666;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &__amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 1rem;
   }
 }

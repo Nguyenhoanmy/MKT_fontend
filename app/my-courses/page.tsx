@@ -24,7 +24,7 @@ export default function MyCoursesPage() {
     const loadCourses = async () => {
       try {
         setIsLoading(true);
-        const allCourses = await courseService.getAllCourses();
+        const allCourses = await courseService.getAll();
         const enrolled = allCourses.filter(c => user.enrolledCourses?.includes(c.id));
         setCourses(enrolled);
       } catch (error) {
