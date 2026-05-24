@@ -1,3 +1,12 @@
+// Parse duration string ("1h 30m") thành số giờ dạng float
+function parseDuration(duration: string): number {
+  if (!duration) return 0;
+  const match = duration.match(/(\d+)h\s*(\d+)?m?/);
+  if (!match) return 0;
+  const hours = parseInt(match[1], 10);
+  const minutes = match[2] ? parseInt(match[2], 10) : 0;
+  return hours + minutes / 60;
+}
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
@@ -334,7 +343,7 @@ export default function ProfilePage() {
                     <h3>Thời gian học</h3>
                     <p className="stat-card__value">
                       {enrolledCourses.length > 0
-                        ? `${enrolledCourses.reduce((a, b) => a + (b.duration || 0), 0)} giờ`
+                        ? `${enrolledCourses.reduce((a, b) => a + parseDuration(b.duration), 0).toFixed(1)} giờ`
                         : '0 giờ'}
                     </p>
                   </div>
