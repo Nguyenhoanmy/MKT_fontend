@@ -272,7 +272,7 @@ export default function ProfilePage() {
                         <div className="course-card-mini__content">
                           <h3 className="course-card-mini__title">{course.title}</h3>
                           <p className="course-card-mini__teacher">
-                            Giáo viên: {course.instructor}
+                            Giáo viên: {course.instructor.name}
                           </p>
 
                           <div className="course-card-mini__progress">
