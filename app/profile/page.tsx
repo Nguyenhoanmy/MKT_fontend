@@ -1,3 +1,4 @@
+"use client";
 // Parse duration string ("1h 30m") thành số giờ dạng float
 function parseDuration(duration: string): number {
   if (!duration) return 0;
@@ -7,7 +8,6 @@ function parseDuration(duration: string): number {
   const minutes = match[2] ? parseInt(match[2], 10) : 0;
   return hours + minutes / 60;
 }
-'use client';
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { courseService } from '@/services/course.service';
