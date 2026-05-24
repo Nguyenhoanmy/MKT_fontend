@@ -59,11 +59,7 @@ cd MKT_fontend
 ### Bước 2: Cài đặt dependencies
 ```bash
 npm install
-# hoặc
-yarn install
-# hoặc
-pnpm install
-```
+
 
 ### Bước 3: Cấu hình Environment Variables
 ```bash
@@ -79,11 +75,7 @@ cp .env.example .env.local
 ### Bước 4: Chạy development server
 ```bash
 npm run dev
-# hoặc
-yarn dev
-# hoặc
-pnpm dev
-```
+
 
 ### Bước 4: Mở ứng dụng
 Mở trình duyệt và truy cập: **[http://localhost:3000](http://localhost:3000)**
