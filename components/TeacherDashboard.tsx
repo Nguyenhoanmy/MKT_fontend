@@ -81,7 +81,7 @@ export default function TeacherDashboard({ teacher }: DashboardProps) {
       rating: course.rating,
       progress: Math.floor(Math.random() * 100) + 30, // 30-100%
       lastUpdated: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toLocaleDateString('vi-VN'),
-      status: Math.random() > 0.3 ? 'active' : 'draft' as const,
+      status: (Math.random() > 0.3 ? 'active' : 'draft') as 'active' | 'draft' | 'archived',
     }));
 
     const filteredCourses = teacherCourses.filter(c => 
